@@ -1,13 +1,13 @@
 "use client";
 import InputField from "@/components/InputField";
 import Wrapper from "@/components/wrapper";
-import { Box, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React from "react";
 
-interface pageProps {}
+// interface pageProps {}
 
-export const page: React.FC<pageProps> = ({}) => {
+export const page: React.FC = ({}) => {
   return (
     <Wrapper variant="small">
       <Formik
