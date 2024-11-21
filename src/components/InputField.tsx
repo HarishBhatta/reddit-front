@@ -17,13 +17,12 @@ type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export const InputField: React.FC<InputFieldProps> = ({
   label,
-  size,
+  size = undefined,
   ...props
 }) => {
   const [field, { error }] = useField(props);
   return (
     <FormControl isInvalid={!!error}>
-      {" "}
       {/* The error is a string but the isInvalid only accepts boolean the !!error converts it to false if empty and true of some error **/}
       <FormLabel htmlFor={field.name}>{label}</FormLabel>
       <Input {...field} id={field.name} {...props} size={size} />

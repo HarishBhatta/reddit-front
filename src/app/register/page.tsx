@@ -1,20 +1,31 @@
 "use client";
 import InputField from "@/components/InputField";
-import Wrapper from "@/components/wrapper";
+import Wrapper from "@/components/Wrapper";
+import { useRegisterMutation } from "@/gql/graphql";
+import { toErrorMap } from "@/utils/toErrorMap";
 import { Box, Button } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 // interface pageProps {}
 
-export const page: React.FC = ({}) => {
+export const Page: React.FC = ({}) => {
+  const [, register] = useRegisterMutation();
+  const router = useRouter();
   return (
     <Wrapper variant="small">
       <Formik
         initialValues={{ username: "", password: "" }}
-        onSubmit={(values) =>
-          console.log("Submitted: ", values.username, values.password)
-        }
+        onSubmit={async (values, { setErrors }) => {
+          const response = await register(values);
+          if (response.data?.register.errors) {
+            setErrors(toErrorMap(response.data.register.errors));
+          } else if (response.data?.register.user) {
+            console.log("Response", response);
+            router.replace("/");
+          }
+        }}
       >
         {({ isSubmitting }) => (
           <Form>
@@ -45,4 +56,4 @@ export const page: React.FC = ({}) => {
     </Wrapper>
   );
 };
-export default page;
+export default Page;
