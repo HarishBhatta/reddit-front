@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 // interface pageProps {}
-
 export const Page: React.FC = ({}) => {
   const [, register] = useRegisterMutation();
   const router = useRouter();
@@ -21,9 +20,8 @@ export const Page: React.FC = ({}) => {
           const response = await register(values);
           if (response.data?.register.errors) {
             setErrors(toErrorMap(response.data.register.errors));
-          } else if (response.data?.register.user) {
-            console.log("Response", response);
-            router.replace("/");
+          } else {
+            router.push("/");
           }
         }}
       >
