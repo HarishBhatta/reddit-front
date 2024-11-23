@@ -1,6 +1,14 @@
-query User {
-  user {
-    id
-    username
+query GetUser {
+  getUser {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      username
+      createdAt
+      updatedAt
+    }
   }
 }
