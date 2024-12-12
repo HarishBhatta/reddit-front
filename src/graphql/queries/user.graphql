@@ -5,10 +5,7 @@ query GetUser {
       message
     }
     user {
-      id
-      username
-      createdAt
-      updatedAt
+      ...UserFields
     }
   }
 }
